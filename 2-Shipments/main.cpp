@@ -101,13 +101,12 @@ int main(int argc, const char * argv[])
         
         pricesFromStringToArray(pricesString, prices);  
         
-    }
 
-    //
-    //  Read in each line and process it.
-    //
+        //
+        //  Read in each line and process it.
+        //
     
-    while (!recordsFile.eof()) {
+        while (!recordsFile.eof()) {
         
         string cardString;
         
@@ -185,7 +184,7 @@ int main(int argc, const char * argv[])
         }
     }
     
-    
+    }
     return 0;
 }
 
