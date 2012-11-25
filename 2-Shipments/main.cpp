@@ -65,6 +65,11 @@ int main(int argc, const char * argv[])
     
     for (int i=0; i<numberOfWarehouses; i++) {
         warehouses[i].name = warehouseNames[i];
+        
+        //Also prep the warehouse with default values.
+        warehouses[i].quantities[0] = 0;
+        warehouses[i].quantities[1] = 0;
+        warehouses[i].quantities[2] = 0;
     }
     
     //
