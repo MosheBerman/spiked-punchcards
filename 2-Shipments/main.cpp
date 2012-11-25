@@ -18,7 +18,28 @@
 
 using namespace std;
 
+//
+//  Method implementations are preceeded by
+//  full explanations of each piece of code.
+//
+
 bool pricesFromStringToArray(string input, double *);
+string cityNameFromCard(string card);
+string pricesForWarehouse(string card);
+
+//
+//  Declare a constant for the number of variables
+//
+
+const int numberOfWarehouses = 5;
+
+//
+//  The names of the warehouses
+//
+
+string warehouseNames[numberOfWarehouses] = {"New York", "Los Angeles", "Miami", "Houston", "Chicago"};
+
+
 
 int main(int argc, const char * argv[])
 {
@@ -28,12 +49,8 @@ int main(int argc, const char * argv[])
     //  we can declare a static array. No need
     //  for dynamic arrays or vectors or whatever.
     //
-    
-    const int numberOfWarehouses = 5;
 
     Warehouse warehouses[numberOfWarehouses];
-    
-    string warehouseNames[numberOfWarehouses] = {"New York", "Los Angeles", "Miami", "Houston", "Chicago"};
     
     //
     //  Read the warehouse names into the warehouse array.
@@ -99,10 +116,11 @@ int main(int argc, const char * argv[])
         if (cardString != "") {
          
             //
-            //  Get the type of record
+            //  Get the type of record & the warehouse name
             //
             
             char recordType = cardString[0];
+            string name = cityNameFromCard(cardString);
             
             //
             //  Take appropriate action, depending on
@@ -183,7 +201,6 @@ bool pricesFromStringToArray(string input, double *buffer){
             //
             
             positionOfTrailingSpace = input.length()-1;
-            
         }
         
         
@@ -225,3 +242,62 @@ bool pricesFromStringToArray(string input, double *buffer){
     
     return true;
 }
+
+//
+//  This method searches for
+//  known city names and returns
+//  the one that occurs in the
+//  shipment card.
+//
+//  Known city names are defined in the
+//  global array "warehouseNames".
+//
+//  Note that this is necessary because
+//  city names have spaces.
+//
+
+string cityNameFromCard(string card){
+    for (int i = 0; i < numberOfWarehouses; i++) {
+        
+        if (card.find(warehouseNames[i]) != string::npos) {
+            return warehouseNames[i];
+        }
+    }
+    
+    return NULL;
+}
+
+//
+//  This method returns the contents
+//  of a card which follow its city name.
+//
+//  Based on our format, this is the prices.
+//
+
+string pricesForWarehouse(string card){
+    
+    string warehouseName = cityNameFromCard(card);
+    
+    size_t locationOfString = card.find(warehouseName);
+    
+    return card.substr(locationOfString+warehouseName.length());
+}
+
+//
+//  Takes a string with prices, an array, an
+//
+
+bool loadQuantitiesFromString(string pricesString, double quantities[], const int numberOfQuantities){
+    
+    
+    istringstream conversionStream(pricesString);
+    
+    for (int i = 0; i < numberOfQuantities; i++) {
+        if(!(conversionStream >> quantities[i])){
+            return false;
+        }
+    }
+
+    return true;
+}
+
