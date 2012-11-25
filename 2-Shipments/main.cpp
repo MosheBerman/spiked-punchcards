@@ -10,8 +10,8 @@
 #include <fstream>
 #include <sstream>
 
-//  Implicitly include Item.h, since Warehouse includes it
 #include "Warehouse.h"
+#include "Card.h"
 
 //  Some utility methods I wrote for file IO.
 #include "FileIO/FileIO.h"
@@ -24,8 +24,8 @@ using namespace std;
 //
 
 bool pricesFromStringToArray(string input, double *);
-string cityNameFromCard(string card);
-string pricesForWarehouse(string card);
+string cityNameFromCard(string);
+bool loadQuantitiesFromString(string, double[], const int);
 
 //
 //  Declare a constant for the number of variables
@@ -119,8 +119,17 @@ int main(int argc, const char * argv[])
             //  Get the type of record & the warehouse name
             //
             
-            char recordType = cardString[0];
-            string name = cityNameFromCard(cardString);
+            Card card;
+            
+            card.cardType = cardString[0];
+            card.city = cityNameFromCard(cardString);
+            
+            double quantities[3];
+            loadQuantitiesFromString(cardString, quantities, 3);
+            
+            card.amount1 = quantities[0];
+            card.amount2 = quantities[1];
+            card.amount3 = quantities[2];
             
             //
             //  Take appropriate action, depending on
@@ -129,13 +138,13 @@ int main(int argc, const char * argv[])
             
             //  ... handle shipments here...
             
-            if (recordType == 's') {
+            if (card.cardType == 's') {
                 
             }
             
             //  ... and Orders here.
             
-            else if(recordType == 'o'){
+            else if(card.cardType == 'o'){
              
                 double price = 0;
                 bool itemWasShippedFromWarehouseToWarehouse[3];
@@ -284,7 +293,8 @@ string pricesForWarehouse(string card){
 }
 
 //
-//  Takes a string with prices, an array, an
+//  Takes a string with prices, an array, and
+//  the number of quantities we expect to load.
 //
 
 bool loadQuantitiesFromString(string pricesString, double quantities[], const int numberOfQuantities){
