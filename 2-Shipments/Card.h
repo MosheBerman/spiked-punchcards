@@ -23,9 +23,15 @@ public:
     
     string description(){
         
+        //  Set up a stream to pipe all of the properties to...
+        
         ostringstream stream;
         
+        //  ...pipe it all in...
+        
         stream << cardType << ' ' << city << '\t' << amount1 << '\t' << amount2 << '\t' << amount3 << '\n';
+        
+        //  ... and return it.
         
         return stream.str();
     }
