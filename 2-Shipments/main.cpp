@@ -82,7 +82,52 @@ int main(int argc, const char * argv[])
         
     }
 
+    //
+    //  Read in each line and process it.
+    //
     
+    while (!recordsFile.eof()) {
+        
+        string cardString;
+        
+        getline(recordsFile, cardString);
+        
+        //
+        //  Check for an empty line
+        //
+        
+        if (cardString != "") {
+         
+            //
+            //  Get the type of record
+            //
+            
+            char recordType = cardString[0];
+            
+            //
+            //  Take appropriate action, depending on
+            //  the kind of record...
+            //
+            
+            //  ... handle shipments here...
+            
+            if (recordType == 's') {
+                
+            }
+            
+            //  ... and Orders here.
+            
+            else if(recordType == 'o'){
+             
+                double price = 0;
+                bool itemWasShippedFromWarehouseToWarehouse[3];
+                
+                
+                
+            }
+            
+        }
+    }
     
     
     return 0;
