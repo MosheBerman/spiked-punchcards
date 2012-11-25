@@ -148,10 +148,19 @@ int main(int argc, const char * argv[])
             if (card.cardType == 's') {
                 
                 
-                // print out the card
+                // Print out the card...
                 
-                cout << card.description();
+                cout << "Shipment: " << card.description();
                 
+                //  ...update the quantities...
+                
+                workingWarehouse.quantities[0] += card.amount1;
+                workingWarehouse.quantities[1] += card.amount2;
+                workingWarehouse.quantities[2] += card.amount3;
+                
+                //  ..and print out the warehouse values.
+                
+                cout << workingWarehouse.description();
                 
             }
             
