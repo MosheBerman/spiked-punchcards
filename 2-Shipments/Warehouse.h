@@ -16,7 +16,7 @@ using namespace std;
 class Warehouse {
 public:
     string name;
-    Item items[3];
+    double quantities[3];
 };
 
 #endif
