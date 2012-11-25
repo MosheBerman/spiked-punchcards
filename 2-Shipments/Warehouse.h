@@ -32,4 +32,10 @@ public:
     }
 };
 
+
+enum WarehouseQuantity {
+    WarehouseQuantityFirst = 0,
+    WarehouseQuantitySecond,
+    WarehouseQuantityThird
+    };
 #endif
