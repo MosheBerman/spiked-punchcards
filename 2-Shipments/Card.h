@@ -16,6 +16,19 @@ public:
     int amount1 = 0;
     int amount2 = 0;
     int amount3 = 0;
+    
+    //
+    //  Returns a string representing the data in the Warehouse
+    //
+    
+    string description(){
+        
+        ostringstream stream;
+        
+        stream << cardType << ' ' << city << '\t' << amount1 << '\t' << amount2 << '\t' << amount3 << '\n';
+        
+        return stream.str();
+    }
 };
 
 #endif
