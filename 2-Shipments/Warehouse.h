@@ -9,8 +9,6 @@
 #ifndef __Shipments_Warehouse_h
 #define __Shipments_Warehouse_h
 
-#include "Item.h"
-
 using namespace std;
 
 class Warehouse {
