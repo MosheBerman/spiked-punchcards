@@ -140,6 +140,12 @@ int main(int argc, const char * argv[])
             
             Warehouse workingWarehouse = warehouseForNameFromArray(card.city, warehouses, numberOfWarehouses);
             
+
+            //  Print out the card, since we want to do that
+            //  regardless of the contents of the card.
+            
+            cout << card.description();
+            
             //
             //  Take appropriate action, depending on
             //  the kind of record...
@@ -147,12 +153,9 @@ int main(int argc, const char * argv[])
             
             //  ... handle shipments here...
             
+
+            
             if (card.cardType == 's') {
-                
-                
-                // Print out the card...
-                
-                cout << "Shipment: " << card.description();
                 
                 //  ...update the quantities...
                 
