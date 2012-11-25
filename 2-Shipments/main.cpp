@@ -27,6 +27,8 @@ bool pricesFromStringToArray(string input, double *);
 string cityNameFromCard(string);
 bool loadQuantitiesFromString(string, double[], const int);
 Warehouse warehouseForNameFromArray(string , Warehouse [], int);
+bool warehouseHasDesiredAmountOfItem(Warehouse, int, int);
+Warehouse warehouseMostStockThatFillsItemAndAmount(Warehouse[], int, int, int);
 
 //
 //  Declare a constant for the number of variables
@@ -170,6 +172,8 @@ int main(int argc, const char * argv[])
              
                 double price = 0;
                 bool itemWasShippedFromWarehouseToWarehouse[3];
+                
+                
                 
                 
                 
@@ -348,3 +352,58 @@ Warehouse warehouseForNameFromArray(string name, Warehouse warehouses[], int num
     
     return NULL;
 }
+
+//
+//  Checks if a given warehouse has enough stock of a given item
+//
+
+bool warehouseHasDesiredAmountOfItem(Warehouse warehouse, int desiredAmount, int item){
+    return warehouse.quantities[item] >= desiredAmount;
+    
+}
+
+Warehouse warehouseMostStockThatFillsItemAndAmount(Warehouse warehouses[], int numberOfWarehouses, int desiredAmount, int item){
+    
+    //
+    //  Prepare an empty warehouse
+    //
+    
+    Warehouse workingWarehouse;
+    
+    workingWarehouse.name = "";
+    workingWarehouse.quantities[0] = 0;
+    workingWarehouse.quantities[1] = 0;
+    workingWarehouse.quantities[2] = 0;
+    
+    //
+    //  For each warehouse, check if it
+    //  has enough and more than the last
+    //  warehouse we checked.
+    //
+    
+    for (int i = 0; i<numberOfWarehouses; i++) {
+        if (warehouses[i].quantities[item] >= desiredAmount) {
+            if(warehouses[i].quantities[item] > workingWarehouse.quantities[item]){
+                workingWarehouse = warehouses[i];
+            }
+        }
+    }
+    
+    //
+    //  If the working warehouse has none of the
+    //  existing item at this point, then we
+    //  should return NULL.
+    //
+    
+    if (workingWarehouse.quantities[item] == 0) {
+        return NULL;
+    }
+    
+    //
+    //  At this point we'll have a warehouse
+    //  that can fill the order. Return it.
+    //
+    
+    return workingWarehouse;
+}
+
