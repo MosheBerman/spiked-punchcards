@@ -51,7 +51,7 @@ int main(int argc, const char * argv[])
     //
     
     ifstream recordsFile;
-    string fileName = "records";
+    string fileName = "cards.txt";
     
     //  If opening fails, print out an error.
     
@@ -78,8 +78,7 @@ int main(int argc, const char * argv[])
     
         getline(recordsFile, pricesString);
         
-        pricesFromStringToArray(pricesString, prices);
-        
+        pricesFromStringToArray(pricesString, prices);  
         
     }
 
@@ -109,9 +108,6 @@ bool pricesFromStringToArray(string input, double buffer[]){
     while (position < input.length()-1) {
         
         size_t positionOfDollarSign = input.find("$", position);
-        size_t positionOfNextDollarSign = input.find("$", position);
-        
-        string priceValueAsString = "";
         
         //
         //  If there are no dollar signs, just
@@ -121,59 +117,62 @@ bool pricesFromStringToArray(string input, double buffer[]){
         
         if (positionOfDollarSign == string::npos) {
             position = input.length();
+            break;
         }
-
+        
+        size_t positionOfTrailingSpace = input.find(" ", positionOfDollarSign-1);
+        
         //
-        //  Otherwise, we have more possible input.
+        //  We found the last dollar sign,
+        //  so take the substring from the
+        //  dollar sign until the end.
         //
         
-        else{
-           
-            //
-            //  We found the last dollar sign,
-            //  so take the substring from the
-            //  dollar sign until the end.
-            //
-            
-            if(positionOfNextDollarSign == string ::npos){
-                
-                //
-                //  Get the index of the last character
-                //
-                
-                positionOfNextDollarSign = input.length()-1;
-                
-            }
+        if(positionOfTrailingSpace == string::npos){
             
             //
-            //  By this point, we have to indices to use
-            //  to grab a substring from the input.
+            //  Get the index of the last character
             //
             
-            priceValueAsString = input.substr(positionOfDollarSign, positionOfNextDollarSign);
-            
-            //
-            //  Convert the string into a double via a stream.
-            //
-            //  If for some reason the conversion fails, then
-            //  return false
-            //
-            
-            istringstream stringToDoubleConverter(priceValueAsString);
-            
-            if(!(stringToDoubleConverter >> buffer[indexForBuffer])){
-                return false;
-            }
-            
-            //
-            //  Move the "header" of the loop to
-            //  the next part of the string.
-            //
-            
-            position = positionOfNextDollarSign;
+            positionOfTrailingSpace = input.length()-1;
             
         }
         
+        
+        //
+        //  By this point, we have to indices to use
+        //  to grab a substring from the input.
+        //
+        
+        string priceValueAsString;
+        
+        priceValueAsString = input.substr(positionOfDollarSign+1, positionOfTrailingSpace-positionOfDollarSign);
+        
+        //
+        //  Convert the string into a double via a stream.
+        //
+        //  If for some reason the conversion fails, then
+        //  return false
+        //
+        
+        istringstream stringToDoubleConverter(priceValueAsString);
+        
+        if(!(stringToDoubleConverter >> buffer[indexForBuffer])){
+            return false;
+        }
+        
+        //
+        //  Move the "header" of the loop to
+        //  the next part of the string.
+        //
+        
+        position = positionOfTrailingSpace;
+        
+        //
+        //  Don't forget to update the buffer index
+        //
+        
+        indexForBuffer++;
     }
     
     return true;
