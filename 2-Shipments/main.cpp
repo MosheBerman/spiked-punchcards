@@ -133,7 +133,11 @@ int main(int argc, const char * argv[])
             card.city = cityNameFromCard(cardString);
             
             double quantities[3];
-            loadQuantitiesFromString(cardString, quantities, 3);
+            
+            if(!loadQuantitiesFromString(pricesForWarehouse(cardString), quantities, 3)){
+                cout << "Failed to read quantities from the card. Skipping this card." << endl;
+                continue;
+            }
             
             card.amount1 = quantities[0];
             card.amount2 = quantities[1];
