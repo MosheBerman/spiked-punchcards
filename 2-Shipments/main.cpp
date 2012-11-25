@@ -181,11 +181,31 @@ int main(int argc, const char * argv[])
             
             else if(card.cardType == 'o'){
              
+                // First print out the card
+                
                 double price = 0;
-                bool itemWasShippedFromWarehouseToWarehouse[3];
+                bool itemWasShippedFromWarehouseToWarehouse[3] = {false, false, false};
                 
+                //
+                //  Process each of the desired items...
+                //
                 
-                
+                for(int i=0; i <2; i++){
+                    
+                    int quantities[3] = {card.amount1, card.amount2, card.amount3};
+                    
+                    if (warehouseHasDesiredAmountOfItem(workingWarehouse, quantities[i], i)) {
+                        
+                        workingWarehouse.quantities[i] * prices[i];
+                        
+                    }
+                    else{
+                        
+                    }
+                    
+                    
+                }
+        
                 
                 
             }
