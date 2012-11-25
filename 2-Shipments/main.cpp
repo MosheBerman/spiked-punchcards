@@ -26,6 +26,7 @@ using namespace std;
 bool pricesFromStringToArray(string input, double *);
 string cityNameFromCard(string);
 bool loadQuantitiesFromString(string, double[], const int);
+Warehouse warehouseForNameFromArray(string , Warehouse [], int);
 
 //
 //  Declare a constant for the number of variables
@@ -116,7 +117,7 @@ int main(int argc, const char * argv[])
         if (cardString != "") {
          
             //
-            //  Get the type of record & the warehouse name
+            //  Process the card
             //
             
             Card card;
@@ -132,6 +133,12 @@ int main(int argc, const char * argv[])
             card.amount3 = quantities[2];
             
             //
+            //  Choose the correct warehouse
+            //
+            
+            
+            
+            //
             //  Take appropriate action, depending on
             //  the kind of record...
             //
@@ -139,6 +146,12 @@ int main(int argc, const char * argv[])
             //  ... handle shipments here...
             
             if (card.cardType == 's') {
+                
+                
+                // print out the card
+                
+                cout << card.description();
+                
                 
             }
             
@@ -311,3 +324,18 @@ bool loadQuantitiesFromString(string pricesString, double quantities[], const in
     return true;
 }
 
+//
+//  Returns a warehouse from a given
+//  array, matching a given name.
+//
+
+Warehouse warehouseForNameFromArray(string name, Warehouse warehouses[], int numberOfWarehouses){
+    
+    for (int i = 0; i<numberOfWarehouses; i++) {
+        if (warehouses[i].name == name) {
+            return warehouses[i];
+        }
+    }
+    
+    return NULL;
+}
