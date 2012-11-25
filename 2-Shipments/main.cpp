@@ -25,10 +25,11 @@ using namespace std;
 
 bool pricesFromStringToArray(string input, double *);
 string cityNameFromCard(string);
+string pricesForWarehouse(string card);
 bool loadQuantitiesFromString(string, double[], const int);
-Warehouse warehouseForNameFromArray(string , Warehouse [], int);
+Warehouse *warehouseForNameFromArray(string , Warehouse [], int);
 bool warehouseHasDesiredAmountOfItem(Warehouse, int, int);
-Warehouse warehouseMostStockThatFillsItemAndAmount(Warehouse[], int, int, int);
+Warehouse *warehouseMostStockThatFillsItemAndAmount(Warehouse[], int, int, int);
 
 //
 //  Declare a constant for the number of variables
@@ -138,8 +139,7 @@ int main(int argc, const char * argv[])
             //  Choose the correct warehouse
             //
             
-            Warehouse workingWarehouse = warehouseForNameFromArray(card.city, warehouses, numberOfWarehouses);
-            
+            Warehouse workingWarehouse = *warehouseForNameFromArray(card.city, warehouses, numberOfWarehouses);
 
             //  Print out the card, since we want to do that
             //  regardless of the contents of the card.
@@ -328,7 +328,6 @@ string pricesForWarehouse(string card){
 
 bool loadQuantitiesFromString(string pricesString, double quantities[], const int numberOfQuantities){
     
-    
     istringstream conversionStream(pricesString);
     
     for (int i = 0; i < numberOfQuantities; i++) {
@@ -345,15 +344,17 @@ bool loadQuantitiesFromString(string pricesString, double quantities[], const in
 //  array, matching a given name.
 //
 
-Warehouse warehouseForNameFromArray(string name, Warehouse warehouses[], int numberOfWarehouses){
+Warehouse *warehouseForNameFromArray(string name, Warehouse warehouses[], int numberOfWarehouses){
+    
+    Warehouse *workingWarehouse = NULL;
     
     for (int i = 0; i<numberOfWarehouses; i++) {
         if (warehouses[i].name == name) {
-            return warehouses[i];
+            workingWarehouse = &warehouses[i];
         }
     }
     
-    return NULL;
+    return workingWarehouse;
 }
 
 //
@@ -365,18 +366,13 @@ bool warehouseHasDesiredAmountOfItem(Warehouse warehouse, int desiredAmount, int
     
 }
 
-Warehouse warehouseMostStockThatFillsItemAndAmount(Warehouse warehouses[], int numberOfWarehouses, int desiredAmount, int item){
+Warehouse *warehouseMostStockThatFillsItemAndAmount(Warehouse warehouses[], int numberOfWarehouses, int desiredAmount, int item){
     
     //
     //  Prepare an empty warehouse
     //
     
-    Warehouse workingWarehouse;
-    
-    workingWarehouse.name = "";
-    workingWarehouse.quantities[0] = 0;
-    workingWarehouse.quantities[1] = 0;
-    workingWarehouse.quantities[2] = 0;
+    Warehouse *workingWarehouse = NULL;
     
     //
     //  For each warehouse, check if it
@@ -386,22 +382,12 @@ Warehouse warehouseMostStockThatFillsItemAndAmount(Warehouse warehouses[], int n
     
     for (int i = 0; i<numberOfWarehouses; i++) {
         if (warehouses[i].quantities[item] >= desiredAmount) {
-            if(warehouses[i].quantities[item] > workingWarehouse.quantities[item]){
-                workingWarehouse = warehouses[i];
+            if(warehouses[i].quantities[item] > (*workingWarehouse).quantities[item]){
+                workingWarehouse = &warehouses[i];
             }
         }
     }
-    
-    //
-    //  If the working warehouse has none of the
-    //  existing item at this point, then we
-    //  should return NULL.
-    //
-    
-    if (workingWarehouse.quantities[item] == 0) {
-        return NULL;
-    }
-    
+        
     //
     //  At this point we'll have a warehouse
     //  that can fill the order. Return it.
