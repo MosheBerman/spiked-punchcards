@@ -18,7 +18,7 @@
 
 using namespace std;
 
-bool pricesFromStringToArray(string input, double[]);
+bool pricesFromStringToArray(string input, double *);
 
 int main(int argc, const char * argv[])
 {
@@ -90,16 +90,19 @@ int main(int argc, const char * argv[])
 
 //
 //  Parses a string which contains dollar amounts
-//  into an array of double values. This code makes
-//  a number of assumptions, but it works for the
-//  purposes of this assignment.
+//  into an array of double values.
+//
+//  For the code to work, we assume that prices are
+//  embedded in a single line string, preceeded by
+//  a dollar sign, and followed by a space. If the format
+//  varies, this code won't work.
 //
 //  IMPORTANT: We don't resize the buffer. So you have
 //  to know how many strings you're planning to extract
 //  ahead of time.
 //
 
-bool pricesFromStringToArray(string input, double buffer[]){
+bool pricesFromStringToArray(string input, double *buffer){
     
     size_t position = 0;
     
@@ -177,27 +180,3 @@ bool pricesFromStringToArray(string input, double buffer[]){
     
     return true;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
