@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		469EE8761662961200D26626 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 469EE8751662961200D26626 /* main.cpp */; };
 		469EE8781662961200D26626 /* __Shipments.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 469EE8771662961200D26626 /* __Shipments.1 */; };
+		469EE88316629E2E00D26626 /* FileIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 469EE88116629E2E00D26626 /* FileIO.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +29,11 @@
 		469EE8711662961200D26626 /* 2-Shipments */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "2-Shipments"; sourceTree = BUILT_PRODUCTS_DIR; };
 		469EE8751662961200D26626 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		469EE8771662961200D26626 /* __Shipments.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = __Shipments.1; sourceTree = "<group>"; };
+		469EE87F16629B1E00D26626 /* Warehouse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Warehouse.h; sourceTree = "<group>"; };
+		469EE88116629E2E00D26626 /* FileIO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FileIO.cpp; path = FileIO/FileIO.cpp; sourceTree = "<group>"; };
+		469EE88216629E2E00D26626 /* FileIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileIO.h; path = FileIO/FileIO.h; sourceTree = "<group>"; };
+		46FB8B5E1662C04D002A26AF /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
+		46FB8B6316631BF7002A26AF /* cards.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cards.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,9 +67,30 @@
 			isa = PBXGroup;
 			children = (
 				469EE8751662961200D26626 /* main.cpp */,
+				469EE88416629EB200D26626 /* FileIO */,
+				469EE88516629EBC00D26626 /* Classes */,
 				469EE8771662961200D26626 /* __Shipments.1 */,
+				46FB8B6316631BF7002A26AF /* cards.txt */,
 			);
 			path = "2-Shipments";
+			sourceTree = "<group>";
+		};
+		469EE88416629EB200D26626 /* FileIO */ = {
+			isa = PBXGroup;
+			children = (
+				469EE88116629E2E00D26626 /* FileIO.cpp */,
+				469EE88216629E2E00D26626 /* FileIO.h */,
+			);
+			name = FileIO;
+			sourceTree = "<group>";
+		};
+		469EE88516629EBC00D26626 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				469EE87F16629B1E00D26626 /* Warehouse.h */,
+				46FB8B5E1662C04D002A26AF /* Card.h */,
+			);
+			name = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -118,6 +145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				469EE8761662961200D26626 /* main.cpp in Sources */,
+				469EE88316629E2E00D26626 /* FileIO.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +238,7 @@
 				469EE87D1662961200D26626 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
