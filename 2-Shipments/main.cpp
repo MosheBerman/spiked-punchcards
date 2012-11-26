@@ -447,6 +447,12 @@ bool warehouseHasDesiredAmountOfItem(Warehouse warehouse, int desiredAmount, int
     
 }
 
+//
+//  Finds a warehouse from an array of warehouses
+//  that can handle the requested item in the
+//  quantity that was requested.
+//
+
 Warehouse *warehouseMostStockThatFillsItemAndAmount(Warehouse warehouses[], int numberOfWarehouses, int desiredAmount, int item){
     
     //
