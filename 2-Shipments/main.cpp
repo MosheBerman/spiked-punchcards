@@ -148,7 +148,7 @@ int main(int argc, const char * argv[])
             //  Choose the correct warehouse
             //
             
-            Warehouse workingWarehouse = *warehouseForNameFromArray(card.city, warehouses, numberOfWarehouses);
+            Warehouse &workingWarehouse = *warehouseForNameFromArray(card.city, warehouses, numberOfWarehouses);
             
             //  Print out the card, since we want to do that
             //  regardless of the contents of the card.
