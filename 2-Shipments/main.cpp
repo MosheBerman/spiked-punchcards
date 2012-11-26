@@ -26,7 +26,7 @@ using namespace std;
 bool pricesFromStringToArray(string input, double *);
 string cityNameFromCard(string);
 string pricesForWarehouse(string card);
-bool loadQuantitiesFromString(string, double[], const int);
+bool loadQuantitiesFromString(string, int[], const int);
 Warehouse *warehouseForNameFromArray(string , Warehouse [], int);
 bool warehouseHasDesiredAmountOfItem(Warehouse, int, int);
 Warehouse *warehouseMostStockThatFillsItemAndAmount(Warehouse[], int, int, int);
@@ -132,7 +132,7 @@ int main(int argc, const char * argv[])
             card.cardType = cardString[0];
             card.city = cityNameFromCard(cardString);
             
-            double quantities[3];
+            int quantities[3];
             
             if(!loadQuantitiesFromString(pricesForWarehouse(cardString), quantities, 3)){
                 cout << "Failed to read quantities from the card. Skipping this card." << endl;
@@ -148,20 +148,15 @@ int main(int argc, const char * argv[])
             //
             
             Warehouse workingWarehouse = *warehouseForNameFromArray(card.city, warehouses, numberOfWarehouses);
-
+            
             //  Print out the card, since we want to do that
             //  regardless of the contents of the card.
             
             cout << card.description();
             
             //
-            //  Take appropriate action, depending on
-            //  the kind of record...
+            //  Handle shipments here...
             //
-            
-            //  ... handle shipments here...
-            
-
             
             if (card.cardType == 's') {
                 
@@ -190,8 +185,6 @@ int main(int argc, const char * argv[])
                 //  Process each of the desired items...
                 //
                 
-                int quantities[3] = {card.amount1, card.amount2, card.amount3};
-                
                 for(int i=0; i <2; i++){
                     
                     //
@@ -217,12 +210,20 @@ int main(int argc, const char * argv[])
                         Warehouse *alternateWarehouse = warehouseMostStockThatFillsItemAndAmount(warehouses, numberOfWarehouses, i, quantities[i]);
                         
                         //
+                        //  If there's no alternate warehouse, flag it.
+                        //
+                        
+                        if (alternateWarehouse == NULL) {
+                            orderFilled = false;
+                        }
+                        
+                        //
                         //  If there's an alternate warehouse,
                         //  then we should process from there.
                         //
                         
-                        if (alternateWarehouse != NULL) {
-                            
+                        else{
+                        
                             //  Charge an extra 10% and deduct from the
                             //  correct warehouse.
                             price += quantities[i] * (prices[i] * 1.1);
@@ -242,15 +243,6 @@ int main(int argc, const char * argv[])
                             cout << (*alternateWarehouse).description() << endl;
                         }
                         
-                        //
-                        //  Otherwise, the order remains unfulfilled.
-                        //
-                        
-                        else{
-                            
-                            cout << "Order Unfulfilled" << endl;
-                            orderFilled = false;
-                        }
                         
                     }
                 }
@@ -258,10 +250,13 @@ int main(int argc, const char * argv[])
                 cout << workingWarehouse.description();
                 
                 if (orderFilled) {
-                    cout << price << endl;
+                    cout << "Price: $" << price << endl;
+                }
+                else{
+                    cout << "Order Unfulfilled" << endl;
                 }
             
-            }
+              }
             
         }
     }
@@ -407,7 +402,7 @@ string pricesForWarehouse(string card){
 //  the number of quantities we expect to load.
 //
 
-bool loadQuantitiesFromString(string pricesString, double quantities[], const int numberOfQuantities){
+bool loadQuantitiesFromString(string pricesString, int quantities[], const int numberOfQuantities){
     
     istringstream conversionStream(pricesString);
     
