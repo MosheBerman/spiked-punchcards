@@ -16,7 +16,7 @@ using namespace std;
 class Warehouse {
 public:
     string name;
-    double quantities[3];
+    int quantities[3];
     
     //
     //  Returns a string representing the data in the Warehouse
