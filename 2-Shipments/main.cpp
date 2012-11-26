@@ -90,10 +90,11 @@ int main(int argc, const char * argv[])
     else{
       
         //
-        //  Declare some variables to hold the prices
+        //  Declare some variables to hold the prices & quantities
         //
         
         double prices[3];
+        int quantities[3];
         
         //
         //  Read out the line that contains the
@@ -132,12 +133,14 @@ int main(int argc, const char * argv[])
             card.cardType = cardString[0];
             card.city = cityNameFromCard(cardString);
             
-            int quantities[3];
-            
             if(!loadQuantitiesFromString(pricesForWarehouse(cardString), quantities, 3)){
                 cout << "Failed to read quantities from the card. Skipping this card." << endl;
                 continue;
             }
+            
+            //
+            //  Put the quantities in the card.
+            //
             
             card.amount1 = quantities[0];
             card.amount2 = quantities[1];
