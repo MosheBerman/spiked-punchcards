@@ -29,7 +29,9 @@ public:
         
         //  ...pipe it all in...
         
-        stream << cardType << ' ' << city << '\t' << amount1 << '\t' << amount2 << '\t' << amount3 << '\n';
+        string cardTitle = cardType == 'o' ? "---- Order: ----\n" : "---- Shipment: ----\n";
+        
+        stream << cardTitle << ' ' << city << '\t' << amount1 << '\t' << amount2 << '\t' << amount3 << '\n';
         
         //  ... and return it.
         
