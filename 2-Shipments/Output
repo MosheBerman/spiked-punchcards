@@ -1,0 +1,73 @@
+---- Shipment: ----
+New York	23	14	11
+New York	23	14	11
+---- Shipment: ----
+Miami	25	25	25
+Miami	25	25	25
+---- Shipment: ----
+Los Angeles	40	13	17
+Los Angeles	40	13	17
+---- Shipment: ----
+Houston	100	30	10
+Houston	100	30	10
+---- Shipment: ----
+Chicago	42	23	19
+Chicago	42	23	19
+---- Shipment: ----
+New York	0	0	15
+New York	23	14	26
+---- Shipment: ----
+Miami	13	17	21
+Miami	38	42	46
+---- Order: ----
+Los Angeles	15	10	15
+Los Angeles	25	3	17
+Price: $100
+---- Order: ----
+New York	12	24	8
+New York	11	14	26
+Price: $24
+Order Unfulfilled
+---- Order: ----
+Houston	75	45	10
+Houston	25	30	10
+Price: $150
+Order Unfulfilled
+---- Order: ----
+Chicago	20	15	15
+Chicago	22	8	19
+Price: $145
+---- Order: ----
+New York	15	0	0
+15 of item 1 shipped from Miami to New York.
+Miami	23	42	46
+New York	11	14	26
+Price: $33
+---- Shipment: ----
+Los Angeles	10	20	10
+Los Angeles	35	23	27
+---- Shipment: ----
+Houston	0	30	40
+Houston	25	60	50
+---- Order: ----
+New York	15	15	25
+15 of item 1 shipped from Miami to New York.
+Miami	8	42	46
+15 of item 2 shipped from Miami to New York.
+Miami	8	27	46
+New York	11	14	26
+Price: $148.5
+---- Order: ----
+Chicago	75	30	40
+30 of item 2 shipped from Houston to Chicago.
+Houston	25	30	50
+Chicago	22	8	19
+Price: $231
+Order Unfulfilled
+---- Shipment: ----
+New York	20	15	20
+New York	31	29	46
+---- Order: ----
+Houston	10	20	10
+Houston	15	10	50
+Price: $160
