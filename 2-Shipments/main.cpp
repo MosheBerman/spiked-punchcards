@@ -43,8 +43,6 @@ const int numberOfWarehouses = 5;
 
 string warehouseNames[numberOfWarehouses] = {"New York", "Los Angeles", "Miami", "Houston", "Chicago"};
 
-
-
 int main(int argc, const char * argv[])
 {
 
@@ -213,10 +211,18 @@ int main(int argc, const char * argv[])
                         Warehouse *alternateWarehouse = warehouseMostStockThatFillsItemAndAmount(warehouses, numberOfWarehouses, i, quantities[i]);
                         
                         //
-                        //  If there's no alternate warehouse, flag it.
+                        //  Because we might get an insufficient warehouse
+                        //  if there are none, we need to double check here.
                         //
                         
-                        if (alternateWarehouse == NULL) {
+                        bool alternateWarehouseIsSufficient = warehouseHasDesiredAmountOfItem((*alternateWarehouse), quantities[i], i);
+                        
+                        //
+                        //  If there's no alternate warehouse, flag
+                        //  the order as unfillable.
+                        //
+                        
+                        if (alternateWarehouse == NULL || !alternateWarehouseIsSufficient) {
                             orderFilled = false;
                         }
                         
@@ -236,14 +242,14 @@ int main(int argc, const char * argv[])
                             //  Print out that the item has been shifted.
                             //
                             
-                            cout << quantities[i] << " of item " << i << " shipped from ";
-                            cout << (*alternateWarehouse).name << " to" << workingWarehouse.name;
+                            cout << quantities[i] << " of item " << i+1 << " shipped from ";
+                            cout << (*alternateWarehouse).name << " to " << workingWarehouse.name << "." << endl;
                             
                             //
                             //  Print out the description of the alternate warehouse.
                             //
                             
-                            cout << (*alternateWarehouse).description() << endl;
+                            cout << (*alternateWarehouse).description();
                         }
                         
                         
@@ -467,7 +473,10 @@ Warehouse *warehouseMostStockThatFillsItemAndAmount(Warehouse warehouses[], int 
     
     for (int i = 0; i<numberOfWarehouses; i++) {
         if (warehouses[i].quantities[item] >= desiredAmount) {
-            if(workingWarehouse != NULL && warehouses[i].quantities[item] > (*workingWarehouse).quantities[item]){
+            if (workingWarehouse == NULL){
+                workingWarehouse = &warehouses[i];
+            }
+            else if(warehouses[i].quantities[item] > (*workingWarehouse).quantities[item]){
                 workingWarehouse = &warehouses[i];
             }
         }
