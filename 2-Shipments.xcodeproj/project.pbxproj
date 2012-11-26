@@ -34,6 +34,7 @@
 		469EE88216629E2E00D26626 /* FileIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileIO.h; path = FileIO/FileIO.h; sourceTree = "<group>"; };
 		46FB8B5E1662C04D002A26AF /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
 		46FB8B6316631BF7002A26AF /* cards.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cards.txt; sourceTree = "<group>"; };
+		46FB8B6516631CCB002A26AF /* Output */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Output; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +72,7 @@
 				469EE88516629EBC00D26626 /* Classes */,
 				469EE8771662961200D26626 /* __Shipments.1 */,
 				46FB8B6316631BF7002A26AF /* cards.txt */,
+				46FB8B6516631CCB002A26AF /* Output */,
 			);
 			path = "2-Shipments";
 			sourceTree = "<group>";
