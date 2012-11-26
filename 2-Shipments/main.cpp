@@ -258,10 +258,10 @@ int main(int argc, const char * argv[])
         
                 cout << workingWarehouse.description();
                 
-                if (orderFilled) {
-                    cout << "Price: $" << price << endl;
-                }
-                else{
+
+                cout << "Price: $" << price << endl;
+                
+                if(!orderFilled){
                     cout << "Order Unfulfilled" << endl;
                 }
             
