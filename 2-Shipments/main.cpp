@@ -459,10 +459,6 @@ bool warehouseHasDesiredAmountOfItem(Warehouse warehouse, int desiredAmount, int
 
 Warehouse *warehouseMostStockThatFillsItemAndAmount(Warehouse warehouses[], int numberOfWarehouses, int desiredAmount, int item){
     
-    //
-    //  Prepare an empty warehouse
-    //
-    
     Warehouse *workingWarehouse = NULL;
     
     //
@@ -482,11 +478,6 @@ Warehouse *warehouseMostStockThatFillsItemAndAmount(Warehouse warehouses[], int 
         }
     }
         
-    //
-    //  At this point we'll have a warehouse
-    //  that can fill the order. Return it.
-    //
-    
     return workingWarehouse;
 }
 
