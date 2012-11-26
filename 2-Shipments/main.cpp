@@ -469,7 +469,7 @@ Warehouse *warehouseMostStockThatFillsItemAndAmount(Warehouse warehouses[], int 
     
     for (int i = 0; i<numberOfWarehouses; i++) {
         if (warehouses[i].quantities[item] >= desiredAmount) {
-            if(warehouses[i].quantities[item] > (*workingWarehouse).quantities[item]){
+            if(workingWarehouse != NULL && warehouses[i].quantities[item] > (*workingWarehouse).quantities[item]){
                 workingWarehouse = &warehouses[i];
             }
         }
