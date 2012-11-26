@@ -184,30 +184,83 @@ int main(int argc, const char * argv[])
                 // First print out the card
                 
                 double price = 0;
-                bool itemWasShippedFromWarehouseToWarehouse[3] = {false, false, false};
+                bool orderFilled = true;
                 
                 //
                 //  Process each of the desired items...
                 //
                 
+                int quantities[3] = {card.amount1, card.amount2, card.amount3};
+                
                 for(int i=0; i <2; i++){
                     
-                    int quantities[3] = {card.amount1, card.amount2, card.amount3};
+                    //
+                    //  If the item is available, process the order...
+                    //
                     
                     if (warehouseHasDesiredAmountOfItem(workingWarehouse, quantities[i], i)) {
                         
-                        workingWarehouse.quantities[i] * prices[i];
+                        //  Add the item to the total cost, and
+                        //  subtract from the total available.
+                        
+                        price += quantities[i] * prices[i];
+                        workingWarehouse.quantities[i] -= quantities[i];
                         
                     }
+                    
+                    //
+                    //  ... otherwise the item is not available in the requested warehouse. 
+                    //
+                    
                     else{
+                    
+                        Warehouse *alternateWarehouse = warehouseMostStockThatFillsItemAndAmount(warehouses, numberOfWarehouses, i, quantities[i]);
+                        
+                        //
+                        //  If there's an alternate warehouse,
+                        //  then we should process from there.
+                        //
+                        
+                        if (alternateWarehouse != NULL) {
+                            
+                            //  Charge an extra 10% and deduct from the
+                            //  correct warehouse.
+                            price += quantities[i] * (prices[i] * 1.1);
+                            (*alternateWarehouse).quantities[i] -= quantities[i];
+                            
+                            //
+                            //  Print out that the item has been shifted.
+                            //
+                            
+                            cout << quantities[i] << " of item " << i << " shipped from ";
+                            cout << (*alternateWarehouse).name << " to" << workingWarehouse.name;
+                            
+                            //
+                            //  Print out the description of the alternate warehouse.
+                            //
+                            
+                            cout << (*alternateWarehouse).description() << endl;
+                        }
+                        
+                        //
+                        //  Otherwise, the order remains unfulfilled.
+                        //
+                        
+                        else{
+                            
+                            cout << "Order Unfulfilled" << endl;
+                            orderFilled = false;
+                        }
                         
                     }
-                    
-                    
                 }
         
+                cout << workingWarehouse.description();
                 
-                
+                if (orderFilled) {
+                    cout << price << endl;
+                }
+            
             }
             
         }
