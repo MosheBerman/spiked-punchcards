@@ -186,7 +186,7 @@ int main(int argc, const char * argv[])
                 //  Process each of the desired items...
                 //
                 
-                for(int i=0; i <2; i++){
+                for(int i=0; i <3; i++){
                     
                     //
                     //  If the item is available, process the order...
