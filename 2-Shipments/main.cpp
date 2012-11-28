@@ -387,7 +387,7 @@ string cityNameFromCard(string card){
         }
     }
     
-    return NULL;
+    return "";
 }
 
 //
